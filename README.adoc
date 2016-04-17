@@ -2,7 +2,7 @@
 
 == CodeEval
 
-Eeasy 
+Easy
 
 * Fizz Buzz
 * String Mask
@@ -10,5 +10,10 @@ Eeasy
 Moderate
 
 * Longest Lines
+* Detecting cycles
+
 
 == Codility
+
+* Binary sum of ones
+* Max element array
