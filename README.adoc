@@ -10,7 +10,8 @@ Easy
 Moderate
 
 * Longest Lines
-* Detecting cycles
+* Detecting Cycles
+* Lowest Common Ancestor
 
 
 == Codility

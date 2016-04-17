@@ -1,10 +1,6 @@
 package sk.loffay.codeeval.moderate;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.util.Scanner;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -85,20 +81,11 @@ public class DetectingCyclesTest extends TestCase {
 
     @Test
     public void testCodeEvalTestData() throws IOException {
-        Scanner scanner = new Scanner( new File("src/test/java/sk/loffay/codeeval/moderate/detectingCycles.expected") );
-        String expected = scanner.useDelimiter("\\A").next();
-        scanner.close();
-
-        ByteArrayOutputStream byteOs = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(byteOs);
-        PrintStream oldSystemOut = System.out;
-        System.setOut(ps);
-
-        DetectingCycles.main(new String[] {"src/test/java/sk/loffay/codeeval/moderate/detectingCycles"});
-
-        String out = byteOs.toString();
-        System.setOut(oldSystemOut);
-
-        Assert.assertEquals(expected, out);
+        TestUtils.testMain("detectingCycles", (args) -> {
+            try {
+                DetectingCycles.main(args);
+            } catch (IOException ex) {
+            }
+        });
     }
 }
