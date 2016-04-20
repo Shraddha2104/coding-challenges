@@ -12,6 +12,7 @@ Moderate
 * Longest Lines
 * Detecting Cycles
 * Lowest Common Ancestor
+* Sum Of Integers
 
 
 == Codility
