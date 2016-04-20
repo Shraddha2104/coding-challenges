@@ -6,6 +6,7 @@ Easy
 
 * Fizz Buzz
 * String Mask
+* Chardonnay Or Cabernet
 
 Moderate
 
