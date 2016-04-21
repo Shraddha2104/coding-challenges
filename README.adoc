@@ -14,7 +14,7 @@ Moderate
 * Detecting Cycles
 * Lowest Common Ancestor
 * Sum Of Integers
-
+* First Non-Repeated Character
 
 == Codility
 
