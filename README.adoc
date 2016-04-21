@@ -22,3 +22,8 @@ Moderate
 
 * Binary sum of ones
 * Max element array
+
+== Prerequisites
+
+* Java 8
+* Maven
