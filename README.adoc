@@ -2,13 +2,13 @@
 
 == CodeEval
 
-Easy
+===== Easy
 
 * Fizz Buzz
 * String Mask
 * Chardonnay Or Cabernet
 
-Moderate
+===== Moderate
 
 * Longest Lines
 * Detecting Cycles
