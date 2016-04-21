@@ -15,6 +15,7 @@ Moderate
 * Lowest Common Ancestor
 * Sum Of Integers
 * First Non-Repeated Character
+* Remove Characters
 
 == Codility
 
