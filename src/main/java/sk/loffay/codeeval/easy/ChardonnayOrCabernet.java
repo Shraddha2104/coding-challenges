@@ -1,4 +1,4 @@
-package sk.loffay.codeeval.moderate;
+package sk.loffay.codeeval.easy;
 
 import java.io.BufferedReader;
 import java.io.File;
