@@ -16,6 +16,7 @@ Moderate
 * Sum Of Integers
 * First Non-Repeated Character
 * Remove Characters
+* Beat or Bit
 
 == Codility
 
