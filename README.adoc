@@ -17,6 +17,7 @@
 * First Non-Repeated Character
 * Remove Characters
 * Beat or Bit
+* Cash Register
 
 == Codility
 
