@@ -18,6 +18,7 @@
 * Remove Characters
 * Beat or Bit
 * Cash Register
+* Meet Comb Sort
 
 == Codility
 
