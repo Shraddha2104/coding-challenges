@@ -19,6 +19,7 @@
 * Beat or Bit
 * Cash Register
 * Meet Comb Sort
+* Suggest Groups
 
 == Codility
 
