@@ -1,5 +1,7 @@
 package sk.loffay.netsute;
 
+import java.util.Random;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,5 +28,22 @@ public class AvlTreeTest {
         tree.inOrderPrint();
 
         Assert.assertTrue(tree.isBalanced());
+    }
+
+    @Test
+    public void testAutonomous() {
+
+        AvlTree<Integer, String> tree = new AvlTree<>();
+
+        Random rand = new Random();
+        for (int i = 0; i < 300; i++) {
+            int randomNum = rand.nextInt(300);
+
+            tree.insert(randomNum, "foo");
+
+            System.out.println("inserted: " + randomNum);
+            tree.print();
+            Assert.assertTrue(tree.isBalanced());
+        }
     }
 }

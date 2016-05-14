@@ -3,6 +3,7 @@ package sk.loffay.netsute;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -22,28 +23,38 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
             throw new IllegalArgumentException("Null key are not allowed");
         }
         if (root == null) {
-            root = new Node<>(key, value, null);
+            root = new Node<>(key, value);
             return;
         }
 
         /**
          * BST insert
          */
-        Node<Key> added = bstInsert(root, key, value);
+        List<Node<Key>> nodesToBalance = bstInsert(root, key, value);
 
         /**
          * fix AVL property
          */
-        fixAvlProperty(added.parent, key, 1);
+        fixAvlProperty(nodesToBalance, key, 1);
     }
 
-    private void fixAvlProperty(Node<Key> node, Key key, int height) {
+    private void fixAvlProperty(List<Node<Key>> nodesToBalance, Key key, int height) {
 
-        while (node != null) {
+        Node<Key> newParent = null;
+
+        for (int i = nodesToBalance.size() - 1; i >= 0; i--) {
+
+            Node<Key> node = nodesToBalance.get(i);
             node.height = height++;
             int balance = getBalance(node);
 
-            Node<Key> newParent = null;
+            if (newParent != null) {
+                if (key.compareTo(node.key) < 0) {
+                    node.left = newParent;
+                } else {
+                    node.right = newParent;
+                }
+            }
 
             //left left
             if (balance > 1 && key.compareTo(node.left.key) < 0) {
@@ -58,16 +69,6 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
                 node.right = rightRotate(node.right);
                 newParent = leftRotate(node);
             }
-
-            if (newParent != null && newParent.parent != null) {
-                if (key.compareTo(node.parent.key) < 0) {
-                    newParent.parent.left = newParent;
-                } else {
-                    newParent.parent.right = newParent;
-                }
-            }
-
-            node = node.parent;
         }
     }
 
@@ -76,8 +77,6 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
         if (node == root) {
             root = newRoot;
         }
-        newRoot.parent = node.parent;
-        node.parent = newRoot;
 
         node.left = newRoot.right;
         newRoot.right = node;
@@ -92,8 +91,6 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
         if (node == root) {
             root = newRoot;
         }
-        newRoot.parent = node.parent;
-        node.parent = newRoot;
 
         node.right = newRoot.left;
         newRoot.left = node;
@@ -103,10 +100,12 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
         return newRoot;
     }
 
+    private List<Node<Key>> bstInsert(Node<Key> node, Key key, Value value) {
 
-    private Node<Key> bstInsert(Node<Key> node, Key key, Value value) {
+        List<Node<Key>> balanceCandidates = new LinkedList<>();
 
         while (node != null) {
+            balanceCandidates.add(node);
             Node<Key> previous = node;
 
             if (key.compareTo(node.key) < 0) {
@@ -117,22 +116,23 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
             } else {
                 //replace
                 node.value = value;
+                return Collections.emptyList();
             }
 
             // add new
             if (node == null) {
-                Node<Key> newNode = new Node<>(key, value, previous);
+                Node<Key> newNode = new Node<>(key, value);
                 if (key.compareTo(previous.key) < 0) {
                     previous.left = newNode;
                 } else {
                     previous.right = newNode;
                 }
 
-                return newNode;
+                return balanceCandidates;
             }
         }
 
-        return node;
+        return balanceCandidates;
     }
 
     public Node<Key> bstInsertRecursive(Node<Key> node, Key key, Value value) {
@@ -143,13 +143,13 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
             if (node.left != null) {
                 node = bstInsertRecursive(node.left, key, value);
             } else {
-                node = (node.left = new Node<>(key, value, node));
+                node = (node.left = new Node<>(key, value));
             }
         } else {
             if (node.right != null) {
                 node = bstInsertRecursive(node.right, key, value);
             } else {
-                node = (node.right = new Node<>(key, value, node));
+                node = (node.right = new Node<>(key, value));
             }
         }
 
@@ -200,18 +200,16 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
         private Key key;
 
         private int height;
-        private Node<Key> parent;
         private Node<Key> left;
         private Node<Key> right;
 
-        public Node(Key key, Value value, Node<Key> parent) {
-            this(key, value, parent, null, null, 0);
+        public Node(Key key, Value value) {
+            this(key, value, null, null, 0);
         }
 
-        public Node(Key key, Value value, Node<Key> parent, Node<Key> left, Node<Key> right, int height) {
+        public Node(Key key, Value value, Node<Key> left, Node<Key> right, int height) {
             this.key = key;
             this.value = value;
-            this.parent = parent;
             this.left = left;
             this.right = right;
             this.height = height;
