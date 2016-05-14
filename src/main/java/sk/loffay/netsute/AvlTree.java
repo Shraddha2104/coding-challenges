@@ -1,7 +1,6 @@
 package sk.loffay.netsute;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 /**
  * @author Pavol Loffay
  *
- * with parent pointers
+ * Non recursive without parent pointers
  */
 public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Value> {
 
@@ -35,18 +34,16 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
         /**
          * fix AVL property
          */
-        fixAvlProperty(nodesToBalance, key, 1);
+        fixAvlProperty(nodesToBalance, key);
     }
 
-    private void fixAvlProperty(List<Node<Key>> nodesToBalance, Key key, int height) {
+    private void fixAvlProperty(List<Node<Key>> nodesToBalance, final Key key) {
 
         Node<Key> newParent = null;
 
         for (int i = nodesToBalance.size() - 1; i >= 0; i--) {
 
             Node<Key> node = nodesToBalance.get(i);
-            node.height = height++;
-            int balance = getBalance(node);
 
             if (newParent != null) {
                 if (key.compareTo(node.key) < 0) {
@@ -54,7 +51,12 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
                 } else {
                     node.right = newParent;
                 }
+                newParent = null;
             }
+
+            updateHeight(node);
+
+            int balance = getBalance(node);
 
             //left left
             if (balance > 1 && key.compareTo(node.left.key) < 0) {
@@ -62,10 +64,10 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
             } else if (balance > 1 && key.compareTo(node.left.key) > 0) {
                 node.left = leftRotate(node.left);
                 newParent = rightRotate(node);
-            } else if (balance < 0 && key.compareTo(node.right.key) > 0) {
+            } else if (balance < -1 && key.compareTo(node.right.key) > 0) {
                 // right right
                 newParent = leftRotate(node);
-            } else if (balance < 0 && key.compareTo(node.right.key) < 0) {
+            } else if (balance < -1 && key.compareTo(node.right.key) < 0) {
                 node.right = rightRotate(node.right);
                 newParent = leftRotate(node);
             }
@@ -74,29 +76,31 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
 
     private Node<Key> rightRotate(Node<Key> node) {
         Node<Key> newRoot = node.left;
-        if (node == root) {
-            root = newRoot;
-        }
-
         node.left = newRoot.right;
         newRoot.right = node;
+        System.out.println("Right rotate " + node.key);
 
-        newRoot.height = max(height(newRoot.left), height(newRoot.right)) + 1;
-        node.height = max(height(node.left), height(node.right)) + 1;
+        if (node == root) {
+            this.root = newRoot;
+        }
+
+        updateHeight(node);
+        updateHeight(newRoot);
         return newRoot;
     }
 
     private Node<Key> leftRotate(Node<Key> node) {
         Node<Key> newRoot = node.right;
-        if (node == root) {
-            root = newRoot;
-        }
-
         node.right = newRoot.left;
         newRoot.left = node;
+        System.out.println("Left rotate " + node.key);
 
-        newRoot.height = max(height(newRoot.left), height(newRoot.right)) + 1;
-        node.height = max(height(node.left), height(node.right)) + 1;
+        if (node == root) {
+            this.root = newRoot;
+        }
+
+        updateHeight(node);
+        updateHeight(newRoot);
         return newRoot;
     }
 
@@ -172,18 +176,15 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
     }
 
     private int getBalance(Node<Key> node) {
-        if (node == null) {
-            return 0;
-        }
+        return node == null ? 0 : height(node.left) - height(node.right);
+    }
 
-        return height(node.left) - height(node.right);
+    private void updateHeight(Node<Key> node) {
+        node.height = max(height(node.left), height(node.right)) + 1;
     }
 
     private int height(Node<Key> node) {
-        if (node == null) {
-            return -1;
-        }
-        return node.height;
+        return node == null ? -1 : node.height;
     }
 
     private int max(int a, int b) {
@@ -200,8 +201,8 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
         private Key key;
 
         private int height;
-        private Node<Key> left;
-        private Node<Key> right;
+        protected Node<Key> left;
+        protected Node<Key> right;
 
         public Node(Key key, Value value) {
             this(key, value, null, null, 0);
@@ -214,110 +215,21 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
             this.right = right;
             this.height = height;
         }
+
+        public Value getValue() {
+            return value;
+        }
+
+        public Key getKey() {
+            return key;
+        }
     }
 
     public boolean isBalanced(){
-        return checkBalance(root) != -1;
-    }
-
-    private int checkBalance(Node<Key> node){
-        if (node == null) return 0;
-        int left = checkBalance(node.left);
-
-        if (left == -1) return -1;
-
-        int right = checkBalance(node.right);
-
-        if (right == -1) return -1;
-
-        if (Math.abs(left - right) > 1) {
-            return -1;
-        } else {
-            return 1 + Math.max(left, right);
-        }
+        return TreeBalanceCheck.checkBalance(root) != -1;
     }
 
     public void print() {
-        int maxLevel = maxLevel(root);
-
-        printNodeInternal(Collections.singletonList(root), 1, maxLevel);
+        new TreePrint().printNodeInternal(Collections.singletonList(root), 1, TreePrint.maxLevel(root));
     }
-
-    private void printNodeInternal(List<Node<Key>> nodes, int level, int maxLevel) {
-        if (nodes.isEmpty() || isAllElementsNull(nodes))
-            return;
-
-        int floor = maxLevel - level;
-        int edgeLines = (int) Math.pow(2, (Math.max(floor - 1, 0)));
-        int firstSpaces = (int) Math.pow(2, (floor)) - 1;
-        int betweenSpaces = (int) Math.pow(2, (floor + 1)) - 1;
-
-        printWhitespaces(firstSpaces);
-
-        List<Node<Key>> newNodes = new ArrayList<Node<Key>>();
-        for (Node<Key> node : nodes) {
-            if (node != null) {
-                System.out.print(node.key);
-                newNodes.add(node.left);
-                newNodes.add(node.right);
-            } else {
-                newNodes.add(null);
-                newNodes.add(null);
-                System.out.print(" ");
-            }
-
-            printWhitespaces(betweenSpaces);
-        }
-        System.out.println("");
-
-        for (int i = 1; i <= edgeLines; i++) {
-            for (int j = 0; j < nodes.size(); j++) {
-                printWhitespaces(firstSpaces - i);
-                if (nodes.get(j) == null) {
-                    printWhitespaces(edgeLines + edgeLines + i + 1);
-                    continue;
-                }
-
-                if (nodes.get(j).left != null)
-                    System.out.print("/");
-                else
-                    printWhitespaces(1);
-
-                printWhitespaces(i + i - 1);
-
-                if (nodes.get(j).right != null)
-                    System.out.print("\\");
-                else
-                    printWhitespaces(1);
-
-                printWhitespaces(edgeLines + edgeLines - i);
-            }
-
-            System.out.println("");
-        }
-
-        printNodeInternal(newNodes, level + 1, maxLevel);
-    }
-
-    private static void printWhitespaces(int count) {
-        for (int i = 0; i < count; i++)
-            System.out.print(" ");
-    }
-
-    private int maxLevel(Node<Key> node) {
-        if (node == null)
-            return 0;
-
-        return Math.max(maxLevel(node.left), maxLevel(node.right)) + 1;
-    }
-
-    private static <T> boolean isAllElementsNull(List<T> list) {
-        for (Object object : list) {
-            if (object != null)
-                return false;
-        }
-
-        return true;
-    }
-
 }
