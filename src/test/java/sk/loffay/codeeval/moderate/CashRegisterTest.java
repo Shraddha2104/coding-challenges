@@ -14,7 +14,7 @@ public class CashRegisterTest extends TestCase {
 
     @Test
     public void testCodeEval() throws FileNotFoundException {
-        TestUtils.testMain("cashRegister", (arg) -> {
+        CodeevalTestUtils.testMain("moderate/cashRegister", (arg) -> {
             try {
                 CashRegister.main(arg);
             } catch (IOException ex) {

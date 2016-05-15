@@ -32,7 +32,7 @@ public class LowestCommonAncestorTest extends TestCase {
 
     @Test
     public void testCodeEval() throws IOException {
-        TestUtils.testMain("lowestCommonAncestor", (args) -> {
+        CodeevalTestUtils.testMain("moderate/lowestCommonAncestor", (args) -> {
             try {
                 LowestCommonAncestor.main(args);
             } catch (IOException ex) {

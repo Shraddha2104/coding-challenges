@@ -1,4 +1,4 @@
-package sk.loffay;
+package sk.loffay.sonarsource;
 
 import java.util.ArrayList;
 import java.util.Arrays;

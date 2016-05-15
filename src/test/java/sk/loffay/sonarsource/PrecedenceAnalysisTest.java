@@ -1,7 +1,9 @@
-package sk.loffay;
+package sk.loffay.sonarsource;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import sk.loffay.sonarsource.PrecedenceAnalysis;
 
 
 /**

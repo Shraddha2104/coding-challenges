@@ -14,7 +14,7 @@ public class SuggestGroupsTest extends TestCase {
 
     @Test
     public void testCodeEval() throws FileNotFoundException {
-        TestUtils.testMain("suggestedGroups", (arg) -> {
+        CodeevalTestUtils.testMain("moderate/suggestedGroups", (arg) -> {
             try {
                 SuggestGroups.main(arg);
             } catch (IOException ex) {

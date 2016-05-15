@@ -1,4 +1,4 @@
-package sk.loffay;
+package sk.loffay.sonarsource;
 
 /**
  * @author Pavol Loffay

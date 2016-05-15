@@ -81,7 +81,7 @@ public class DetectingCyclesTest extends TestCase {
 
     @Test
     public void testCodeEvalTestData() throws IOException {
-        TestUtils.testMain("detectingCycles", (args) -> {
+        CodeevalTestUtils.testMain("moderate/detectingCycles", (args) -> {
             try {
                 DetectingCycles.main(args);
             } catch (IOException ex) {
