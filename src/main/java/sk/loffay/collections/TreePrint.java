@@ -1,4 +1,4 @@
-package sk.loffay.netsute;
+package sk.loffay.collections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class TreePrint {
 
-    public void printNodeInternal(List<AvlTree.Node> nodes, int level, int maxLevel) {
+    public static void printNodeInternal(List<AvlTree.Node> nodes, int level, int maxLevel) {
         if (nodes.isEmpty() || isAllElementsNull(nodes))
             return;
 
