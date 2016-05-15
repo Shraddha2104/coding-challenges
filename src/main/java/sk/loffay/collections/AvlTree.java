@@ -9,20 +9,19 @@ import sk.loffay.netsute.Tree;
 
 /**
  * @author Pavol Loffay
- *
- * Non recursive without parent pointers
  */
 public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Value> {
 
     private Node<Key, Value> root;
 
-    public AvlTree() {
-    }
-
     public Node<Key, Value> getRoot() {
         return root;
     }
 
+    /**
+     * Non recursive insert
+     */
+    @Override
     public void insert(Key key, Value value) {
         if (key == null) {
             throw new IllegalArgumentException("Null key are not allowed");
@@ -114,8 +113,48 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
         return newRoot;
     }
 
+    public void insertRecursive(Key key, Value value) {
+        root = insertRecursive(root, key, value);
+    }
+
+    public Node<Key, Value> insertRecursive(Node<Key, Value> node, Key key, Value value) {
+
+        // insert
+        if (node == null) {
+            return new Node<>(key, value);
+        }
+
+        if (key.compareTo(node.key) < 0) {
+            node.left = insertRecursive(node.left, key, value);
+        } else if (key.compareTo(node.key) > 0) {
+            node.right = insertRecursive(node.right, key, value);
+        }
+
+        updateHeight(node);
+        int balance = getBalance(node);
+
+        if (balance > 1) {
+            if (key.compareTo(node.left.key) < 0) {
+                // left left
+                node = rightRotate(node);
+            } else if (key.compareTo(node.left.key) > 0) {
+                node.left = leftRotate(node.left);
+                node = rightRotate(node);
+            }
+        } else if (balance < -1) {
+            if (key.compareTo(node.right.key) > 0) {
+                // right right
+                node = leftRotate(node);
+            } else if (key.compareTo(node.right.key) < 0) {
+                node.right = rightRotate(node.right);
+                node = leftRotate(node);
+            }
+        }
+
+        return node;
+    }
+
     /**
-     *
      * @param node - root
      * @param key
      * @param value
@@ -195,14 +234,17 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
             this.height = height;
         }
 
+        @Override
         public Value getValue() {
             return value;
         }
 
+        @Override
         public void setValue(Value value) {
             this.value = value;
         }
 
+        @Override
         public Key getKey() {
             return key;
         }

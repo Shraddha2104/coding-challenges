@@ -56,14 +56,14 @@ public class AvlTreeTest {
 //            System.out.println("inserting: " + randomNum + ", to tree:");
 //            tree.print();
 
-            tree.insert(randomNum, "foo");
+            tree.insertRecursive(randomNum, "foo");
             added.add(randomNum);
 
 //            System.out.println("tree after inserted:" + randomNum);
 //            tree.print();
 
             assertOrdered(TreeTraversals.inOrderStack(tree.getRoot()), true);
-            Assert.assertTrue(added.toString(), tree.isBalanced());
+            Assert.assertTrue("not balanced for: " + added.toString(), tree.isBalanced());
         }
 
         System.out.println(Arrays.toString(TreeTraversals.inOrder(tree.getRoot()).toArray()));
