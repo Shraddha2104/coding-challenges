@@ -20,6 +20,8 @@
 * Cash Register
 * Meet Comb Sort
 * Suggest Groups
+* Trailing String
+* Car Race
 
 == Codility
 
