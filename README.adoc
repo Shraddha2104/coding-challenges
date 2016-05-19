@@ -22,6 +22,9 @@
 * Suggest Groups
 * Trailing String
 * Car Race
+* Endianness
+* Number Of Ones
+* Data recovery
 
 == Codility
 
