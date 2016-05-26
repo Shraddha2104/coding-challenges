@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import sk.loffay.netsute.Tree;
-
 /**
  * @author Pavol Loffay
  */

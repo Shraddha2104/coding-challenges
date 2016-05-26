@@ -5,10 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.Stack;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import sk.loffay.Utils;
 
 /**
  * @author Pavol Loffay
@@ -33,10 +34,10 @@ public class AvlTreeTest {
 
         List<Integer> inOrder = TreeTraversals.inOrder(tree.getRoot());
         System.out.println(inOrder);
-        assertOrdered(inOrder, true);
+        Assert.assertTrue(Utils.isSorted(inOrder, true));
 
         List<Integer> preOrder = TreeTraversals.preOrder(tree.getRoot());
-        assertPreOrder(preOrder);
+        Assert.assertTrue(Utils.isPreOrder(preOrder));
         System.out.println(preOrder);
 
         Assert.assertTrue(tree.isBalanced());
@@ -62,43 +63,11 @@ public class AvlTreeTest {
 //            System.out.println("tree after inserted:" + randomNum);
 //            tree.print();
 
-            assertOrdered(TreeTraversals.inOrderStack(tree.getRoot()), true);
+            Assert.assertTrue(Utils.isSorted(TreeTraversals.inOrderStack(tree.getRoot()), true));
             Assert.assertTrue("not balanced for: " + added.toString(), tree.isBalanced());
         }
 
         System.out.println(Arrays.toString(TreeTraversals.inOrder(tree.getRoot()).toArray()));
     }
 
-    public static <T extends Comparable<T>> void assertOrdered(List<T> values, boolean ascending) {
-
-        Comparable<? extends T> previous = null;
-
-        for(Comparable val: values) {
-
-            if (previous != null) {
-                boolean result = ascending ? val.compareTo(val) > 0 : val.compareTo(val) < 0;
-                if (result) {
-                    Assert.fail("items nor ordered");
-                }
-            }
-
-            previous = val;
-        }
-    }
-
-    public static <T extends Comparable<T>> void assertPreOrder(List<T> preOrder) {
-
-        Stack<Comparable<T>> stack = new Stack<>();
-        Comparable<T> lower = null;
-
-        for(int i = 0; i < preOrder.size() ;i++) {
-            if(lower != null && lower.compareTo(preOrder.get(i)) > 0) {
-                Assert.fail("not preOrder");
-            }
-            while(!stack.isEmpty() && stack.peek().compareTo(preOrder.get(i)) < 0) {
-                lower = stack.pop();
-            }
-            stack.push(preOrder.get(i));
-        }
-    }
 }

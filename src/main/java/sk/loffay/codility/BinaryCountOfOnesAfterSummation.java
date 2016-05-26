@@ -5,7 +5,7 @@ package sk.loffay.codility;
  *
  * 100 %
  */
-public class BinarySumOfOnesSonarSource {
+public class BinaryCountOfOnesAfterSummation {
 
     public int solution(final int a, int b) {
 

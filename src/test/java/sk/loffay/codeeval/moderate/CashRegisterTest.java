@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import junit.framework.TestCase;
+import sk.loffay.codeeval.CodeevalTestUtils;
 
 /**
  * @author Pavol Loffay

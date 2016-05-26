@@ -1,4 +1,4 @@
-package sk.loffay.codeeval.moderate;
+package sk.loffay.codeeval;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,7 +14,7 @@ import org.junit.Assert;
  */
 public abstract class CodeevalTestUtils {
 
-    public static final String PATH = "src/test/java/sk/loffay/codeeval/moderate/";
+    public static final String PATH = "src/testGenerateDictionary/java/sk/loffay/codeeval/moderate/";
 
 
     public static void testMain(String testFile, Consumer<String[]> main) throws FileNotFoundException {

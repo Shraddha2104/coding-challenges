@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import sk.loffay.codeeval.CodeevalTestUtils;
+
 /**
  * @author Pavol Loffay
  */

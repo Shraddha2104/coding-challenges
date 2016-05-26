@@ -1,4 +1,4 @@
-package sk.loffay.netsute;
+package sk.loffay.collections;
 
 /**
  * @author Pavol Loffay
