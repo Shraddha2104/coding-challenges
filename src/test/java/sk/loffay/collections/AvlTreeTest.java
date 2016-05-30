@@ -1,6 +1,5 @@
 package sk.loffay.collections;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -44,15 +43,15 @@ public class AvlTreeTest {
     }
 
     @Test
-    public void testAutonomous() {
+    public void testRandom() {
 
         Random rand = new Random();
         AvlTree<Integer, String> tree = new AvlTree<>();
 
         Set<Integer> added = new HashSet<>(200);
 
-        for (int i = 0; i < 5000; i++) {
-            int randomNum = rand.nextInt(5000);
+        for (int i = 0; i < 533; i++) {
+            int randomNum = rand.nextInt(533);
 
 //            System.out.println("inserting: " + randomNum + ", to tree:");
 //            tree.print();
@@ -64,10 +63,9 @@ public class AvlTreeTest {
 //            tree.print();
 
             Assert.assertTrue(Utils.isSorted(TreeTraversals.inOrderStack(tree.getRoot()), true));
+            Assert.assertTrue(Utils.isPreOrder(TreeTraversals.preOrderStack(tree.getRoot())));
+            Assert.assertTrue(Utils.isPostOrder(TreeTraversals.postOrder(tree.getRoot())));
             Assert.assertTrue("not balanced for: " + added.toString(), tree.isBalanced());
         }
-
-        System.out.println(Arrays.toString(TreeTraversals.inOrder(tree.getRoot()).toArray()));
     }
-
 }

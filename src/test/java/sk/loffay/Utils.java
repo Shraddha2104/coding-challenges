@@ -44,4 +44,45 @@ public class Utils {
 
         return true;
     }
+
+    public static <T extends Comparable<T>> boolean isPostOrder(List<T> postOrder) {
+        return isPostOrder(postOrder, postOrder.size());
+    }
+
+    public static <T extends Comparable<T>> boolean isPostOrder(List<T> postOrder, int length) {
+        if (postOrder == null || length <= 0) {
+            return false;
+        }
+
+        T root = postOrder.get(length - 1);
+        int i = 0;
+
+        // nodes on the left are less than root
+        while (i < length - 1) {
+            if (postOrder.get(i).compareTo(root) > 0) {
+                break;
+            }
+            i++;
+        }
+
+        while (i < length - 1) {
+            if (postOrder.get(i).compareTo(root) < 0) {
+                return false;
+            }
+            i++;
+        }
+
+        boolean left = true;
+        if (i > 0) {
+            left = isPostOrder(postOrder, i);
+        }
+
+        boolean right = true;
+        if (i < length - 1) {
+            right = isPostOrder(postOrder.subList(i, length), length-i-1);
+        }
+
+
+        return left && right;
+    }
 }

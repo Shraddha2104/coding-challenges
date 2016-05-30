@@ -31,6 +31,23 @@ public class TreeTraversals {
         }
     }
 
+    public static <Key extends Comparable<Key>, Value> List<Key> preOrderStack(TreeNode<Key, Value> node) {
+        List<Key> result = new LinkedList<>();
+
+        LinkedList<TreeNode<Key, Value>> nodesStack = new LinkedList<>();
+
+        while (node != null) {
+            result.add(node.getKey());
+
+            node = node.getLeft() == null ? node.getRight() : node.getLeft();
+            if (node == null) {
+                node = nodesStack.peek() == null ? null: nodesStack.pop();
+            }
+        }
+
+        return result;
+    }
+
     public static <Key extends Comparable<Key>, Value> List<Key> inOrder(TreeNode<Key, Value> node) {
         if (node != null) {
             List<Key> inOrderList = new LinkedList<>();
@@ -103,5 +120,30 @@ public class TreeTraversals {
             inOrder(node.getRight(), postOrderList);
             postOrderList.add(node.getKey());
         }
+    }
+
+    public static <Key extends Comparable<Key>, Value> List<Key> postOrderStack(TreeNode<Key, Value> node) {
+        List<Key> postOrder = new LinkedList<>();
+
+        LinkedList<TreeNode<Key, Value>> stack = new LinkedList<>();
+
+        while (node != null) {
+            stack.push(node);
+            node = node.getLeft();
+        }
+
+        while ((node = stack.peek() != null ? stack.pop() : null) != null) {
+            if (node.getRight() != null) {
+                TreeNode<Key, Value> temp = node.getRight();
+                while (temp != null) {
+                    stack.push(temp.getRight());
+                    temp = temp.getLeft();
+                }
+            } else {
+                postOrder.add(node.getKey());
+            }
+        }
+
+        return postOrder;
     }
 }
