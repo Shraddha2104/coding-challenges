@@ -25,6 +25,8 @@
 * Endianness
 * Number Of Ones
 * Data recovery
+* Number Pairs
+* Meet Cocktail Sort
 
 == Codility
 
