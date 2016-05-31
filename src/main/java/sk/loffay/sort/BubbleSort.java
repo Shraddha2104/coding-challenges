@@ -4,8 +4,8 @@ package sk.loffay.sort;
  * @author Pavol Loffay
  *
  * Time complexity:              O(N^2)
- * Space complexity: in place    O(N), O(1)/;
- * Is stable - alg. change position of elements with the same keys
+ * Space complexity: in place    O(1);
+ * Is stable - alg. does NOT change position of elements with the same keys
  * Sorting partialy sorted array does NOT require the same time as unsorted array
  */
 public class BubbleSort<T extends Comparable<T>> implements Sort<T> {

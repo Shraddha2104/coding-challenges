@@ -13,7 +13,7 @@ import org.junit.Test;
 public class SortTest {
 
     @Test
-    public void testSortAlgorithms() {
+    public void testSortingAlgorithms() {
         List<Sort<Integer>> sortsToTest = new ArrayList<>(Arrays.asList(
                 new SelectionSort<>(),
                 new BubbleSort<>(),
