@@ -27,6 +27,8 @@
 * Data recovery
 * Number Pairs
 * Meet Cocktail Sort
+* Organizational Hierarchy
+* Decode Numbers
 
 == Codility
 
