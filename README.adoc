@@ -29,6 +29,9 @@
 * Meet Cocktail Sort
 * Organizational Hierarchy
 * Decode Numbers
+* Try To Solve It
+* Alternative Reality
+* Interrupted Bubble Sort
 
 == Codility
 
