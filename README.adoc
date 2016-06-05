@@ -33,6 +33,7 @@
 * Alternative Reality
 * Interrupted Bubble Sort
 * Column Names
+* Number Operations
 
 == Codility
 
