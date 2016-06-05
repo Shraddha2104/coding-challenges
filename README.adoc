@@ -32,6 +32,7 @@
 * Try To Solve It
 * Alternative Reality
 * Interrupted Bubble Sort
+* Column Names
 
 == Codility
 
