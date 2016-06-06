@@ -5,9 +5,13 @@ import java.util.LinkedList;
 
 /**
  * @author Pavol Loffay
- * Time complexity:               O(N*long(N)), always, quicksort can produce O(N^2)
- * Space complexity: not in place O(N), some variants acheive O(N/2);
+ *
+ * Best =       N*log(N)
+ * Average =    N*log(N)
+ * Worst =      N*log(N)
+ * Space comp = N, some implementations acheive N/2
  * Stable - alg. does NOT change position of elements with the same keys
+ *
  * Sorting partialy sorted array requires the same time as unsorted array
  */
 public class MergeSort<T extends Comparable<T>> implements Sort<T> {

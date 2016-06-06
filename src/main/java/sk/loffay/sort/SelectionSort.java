@@ -3,10 +3,11 @@ package sk.loffay.sort;
 /**
  * @author Pavol Loffay
  *
- * Time complexity:             O(N^2)
- * Space complexity: in place   O(N), O(1);
+ * Best =       N^2
+ * Average =    N^2
+ * Worst =      N^2
+ * Space comp = 1
  * Not stable - alg. change position of elements with the same keys
- * Sorting partialy sorted array requires the same time as unsorted array
  */
 public class SelectionSort<T extends Comparable<T>> implements Sort<T>{
 

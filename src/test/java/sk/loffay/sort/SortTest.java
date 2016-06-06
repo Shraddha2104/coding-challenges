@@ -18,7 +18,8 @@ public class SortTest {
                 new SelectionSort<>(),
                 new BubbleSort<>(),
                 new InsertionSort<>(),
-                new MergeSort<>()));
+                new MergeSort<>(),
+                new HeapSort<>()));
 
         int runs = 5;
         int arrSize = 20;
