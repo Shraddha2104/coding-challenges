@@ -33,12 +33,4 @@ public class ColumnNames {
 
         return result;
     }
-
-    public static char to26Char(int number) {
-        if (number < 1 || number > 26) {
-            throw new IllegalArgumentException(number + " is not in range [0, 26]");
-        }
-
-        return Character.toChars(number+64)[0];
-    }
 }

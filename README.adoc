@@ -36,6 +36,7 @@
 * Number Operations
 * Stack Implementation
 * Decimal To Binary
+* Email Validation
 
 == Codility
 
