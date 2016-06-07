@@ -37,6 +37,11 @@
 * Stack Implementation
 * Decimal To Binary
 * Email Validation
+* Double Trouble
+* Minimum Coins
+* Locks
+
+===== Hard
 
 == Codility
 
