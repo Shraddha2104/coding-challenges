@@ -40,6 +40,8 @@
 * Double Trouble
 * Minimum Coins
 * Locks
+* Pangrams
+* Find a Square
 
 ===== Hard
 
