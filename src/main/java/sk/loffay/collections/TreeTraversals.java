@@ -1,5 +1,7 @@
 package sk.loffay.collections;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -145,5 +147,60 @@ public class TreeTraversals {
         }
 
         return postOrder;
+    }
+
+    public static <Key extends Comparable<Key>, Value> List<Key> breadthFirstSearch(TreeNode<Key, Value> root) {
+        List<Key> keys = new LinkedList<>();
+        if (root != null) {
+            keys = breadthFirstSearch(Arrays.asList(root));
+            keys.add(0, root.getKey());
+        }
+        return keys;
+    }
+
+    private static <Key extends Comparable<Key>, Value> List<Key> breadthFirstSearch(List<TreeNode<Key, Value>> nodes) {
+
+        List<Key> bfsResult = new LinkedList<>();
+        List<TreeNode<Key, Value>> nextLevelNodes = new ArrayList<>(nodes.size()*2);
+
+        for (TreeNode<Key, Value> current: nodes){
+            if (current.getLeft() != null) {
+                bfsResult.add(current.getLeft().getKey());
+                nextLevelNodes.add(current.getLeft());
+            }
+            if (current.getRight() != null) {
+                bfsResult.add(current.getRight().getKey());
+                nextLevelNodes.add(current.getRight());
+            }
+        }
+
+        if (!nodes.isEmpty()) {
+            bfsResult.addAll(breadthFirstSearch(nextLevelNodes));
+        }
+
+        return bfsResult;
+    }
+
+    public static <Key extends Comparable<Key>, Value> List<Key> breadthFirstSearchIterative(TreeNode<Key, Value> root) {
+
+        List<Key> bfsResult = new LinkedList<>();
+        if (root != null) {
+            LinkedList<TreeNode<Key, Value>> stack = new LinkedList<>();
+            stack.add(root);
+
+            while (!stack.isEmpty()) {
+                TreeNode<Key, Value> current = stack.pollFirst();
+                bfsResult.add(current.getKey());
+
+                if (current.getLeft() != null) {
+                    stack.add(current.getLeft());
+                }
+                if (current.getRight() != null) {
+                    stack.add(current.getRight());
+                }
+            }
+        }
+
+        return bfsResult;
     }
 }

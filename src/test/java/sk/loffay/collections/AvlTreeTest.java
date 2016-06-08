@@ -32,14 +32,16 @@ public class AvlTreeTest {
         tree.print();
 
         List<Integer> inOrder = TreeTraversals.inOrder(tree.getRoot());
-        System.out.println(inOrder);
         Assert.assertTrue(Utils.isSorted(inOrder, true));
 
         List<Integer> preOrder = TreeTraversals.preOrder(tree.getRoot());
         Assert.assertTrue(Utils.isPreOrder(preOrder));
-        System.out.println(preOrder);
-
         Assert.assertTrue(tree.isBalanced());
+
+        List<Integer> bfsOrder = TreeTraversals.breadthFirstSearch(tree.getRoot());
+        Assert.assertArrayEquals(new Integer[]{4, 2, 7, 1, 3, 6, 32, 15, 99}, bfsOrder.toArray(new Integer[0]));
+        Assert.assertArrayEquals(new Integer[]{4, 2, 7, 1, 3, 6, 32, 15, 99},
+                TreeTraversals.breadthFirstSearchIterative(tree.getRoot()).toArray(new Integer[0]));
     }
 
     @Test
