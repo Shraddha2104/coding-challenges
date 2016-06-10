@@ -34,60 +34,52 @@ public class BrokenLCD {
             intSegments[i] = Integer.parseInt(num, 2);
         }
 
-        List<Integer> digitsOfNumber = new ArrayList<>();
+        List<Number> digitsOfNumber = new ArrayList<>();
         for (int i = 0; i < number.length(); i++) {
-            Integer digit = null;
             try {
-                digit = Integer.parseInt(""+ number.charAt(i));
-                digit = changeBits(digit);
+                Integer parsedInt = Integer.parseInt(""+ number.charAt(i));
+                parsedInt = changeBits(parsedInt);
+                digitsOfNumber.add(new Number(parsedInt, false));
             } catch (NumberFormatException ex) {
                 // it is dot
+                digitsOfNumber.get(i-1).dot = true;
             }
-            digitsOfNumber.add(digit);
         }
 
-        boolean isAbleToDisplay = false;
-        int iDigit = 0;
+        int successfullyDisplayed = 0;
         for (int iSegment = 0; iSegment < intSegments.length; iSegment++) {
 
-            isAbleToDisplay = false;
+            successfullyDisplayed = 0;
             int iDigitSegmentIndex = iSegment;
-            for (iDigit = 0; iDigit < digitsOfNumber.size() && iDigitSegmentIndex < intSegments.length; iDigit++) {
+            for (int iDigit = 0; iDigit < digitsOfNumber.size() && iDigitSegmentIndex < intSegments.length;) {
 
-                if (digitsOfNumber.get(iDigit) == null) {
-                    iDigitSegmentIndex--;
-                }
-
-                isAbleToDisplay = isAbleToDisplay(digitsOfNumber.get(iDigit), intSegments[iDigitSegmentIndex],
+                boolean isAbleToDisplay = isAbleToDisplay(digitsOfNumber.get(iDigit), intSegments[iDigitSegmentIndex],
                         segments[iDigitSegmentIndex]);
 
-                if (!isAbleToDisplay) {
+                if (isAbleToDisplay) {
+                    successfullyDisplayed++;
+                    iDigit++;
+                } else {
                     break;
-                }
-
-                if (digitsOfNumber.get(iDigit) == null) {
-                    iDigitSegmentIndex++;
                 }
 
                 iDigitSegmentIndex++;
             }
 
-            if (iDigit == digitsOfNumber.size() && isAbleToDisplay) {
+            if (successfullyDisplayed ==  digitsOfNumber.size()) {
                 return true;
             }
         }
 
-        return iDigit == digitsOfNumber.size() && isAbleToDisplay;
+        return successfullyDisplayed == digitsOfNumber.size();
     }
 
-    private static boolean isAbleToDisplay(Integer digit, int intSegment, String segment) {
-        if (digit != null) {
-            return (digit & intSegment) == digit;
-        } else {
-            // it is a dot
-            char segmentDot = segment.charAt(segment.length() - 1);
-            return segmentDot == '1';
+    private static boolean isAbleToDisplay(Number number, int intSegment, String segment) {
+        boolean isDotOk = true;
+        if (number.dot) {
+            isDotOk = segment.charAt(segment.length() - 1) == '1';
         }
+        return (number.number & intSegment) == number.number && isDotOk;
     }
 
     public static int changeBits(int num) {
@@ -125,5 +117,15 @@ public class BrokenLCD {
         }
 
         return intNumber;
+    }
+
+    private static class Number {
+        private final int number;
+        private boolean dot;
+
+        public Number(int number, boolean dot) {
+            this.number = number;
+            this.dot = dot;
+        }
     }
 }
