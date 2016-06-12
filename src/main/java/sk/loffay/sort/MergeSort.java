@@ -20,6 +20,7 @@ public class MergeSort<T extends Comparable<T>> implements Sort<T> {
     public void sort(T[] arr) {
 
         LinkedList<T> sortedList = mergeSort(new LinkedList<>(Arrays.asList(arr)));
+        // fill the output array
         for (int i = 0; i < arr.length; i++) {
             arr[i] = sortedList.get(i);
         }

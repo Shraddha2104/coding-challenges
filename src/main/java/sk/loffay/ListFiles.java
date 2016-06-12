@@ -27,7 +27,7 @@ public class ListFiles {
     public static List<String> traversal(final String pattern, final String directory) {
 
         if (pattern == null) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
 
         final List<String> result = new ArrayList<>();

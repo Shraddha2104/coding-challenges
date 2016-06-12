@@ -42,8 +42,11 @@
 * Locks
 * Pangrams
 * Find a Square
+* Broken LCD
+* Card Number Validation
 
 ===== Hard
+* String Permutations
 
 == Codility
 
