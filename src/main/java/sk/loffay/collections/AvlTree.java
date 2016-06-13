@@ -40,6 +40,55 @@ public class AvlTree<Key extends Comparable<Key>, Value> implements Tree<Key, Va
         fixAvlProperty(nodesToBalance, key);
     }
 
+    @Override
+    public Value min() {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode<Key, Value> temp = root;
+        while (temp.getLeft() != null) {
+            temp = temp.getLeft();
+        }
+        return temp.getValue();
+    }
+
+    @Override
+    public Value max() {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode<Key, Value> temp = root;
+        while (temp.getRight() != null) {
+            temp = temp.getRight();
+        }
+        return temp.getValue();
+    }
+
+    @Override
+    public Value get(Key key) {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode<Key, Value> temp = root;
+        while (temp != null) {
+            if (temp.getKey().compareTo(key) == 0) {
+                return temp.getValue();
+            }
+
+            if (key.compareTo(temp.getKey()) < 0) {
+                temp = temp.getLeft();
+            } else {
+                temp = temp.getRight();
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public void delete(Key key) {
         throw new UnsupportedOperationException();
     }

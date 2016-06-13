@@ -19,14 +19,18 @@ public class AvlTreeTest {
     public void test() {
         AvlTree<Integer, String> tree = new AvlTree<>();
 
-        tree.insert(1, "string");
+        Assert.assertEquals(null, tree.min());
+        Assert.assertEquals(null, tree.max());
+        Assert.assertEquals(null, tree.get(1));
+
+        tree.insert(1, "stringMin");
         tree.insert(2, "string");
         tree.insert(3, "string");
         tree.insert(4, "string");
         tree.insert(32, "string");
-        tree.insert(6, "string");
+        tree.insert(6, "string6");
         tree.insert(7, "string");
-        tree.insert(99, "string");
+        tree.insert(99, "stringMax");
         tree.insert(15, "string");
 
         tree.print();
@@ -42,6 +46,12 @@ public class AvlTreeTest {
         Assert.assertArrayEquals(new Integer[]{4, 2, 7, 1, 3, 6, 32, 15, 99}, bfsOrder.toArray(new Integer[0]));
         Assert.assertArrayEquals(new Integer[]{4, 2, 7, 1, 3, 6, 32, 15, 99},
                 TreeTraversals.breadthFirstSearchIterative(tree.getRoot()).toArray(new Integer[0]));
+
+        Assert.assertEquals("stringMax", tree.max());
+        Assert.assertEquals("stringMin", tree.min());
+        Assert.assertEquals("string6", tree.get(6));
+        Assert.assertEquals(null, tree.get(999));
+        Assert.assertEquals(null, tree.get(-999));
     }
 
     @Test
