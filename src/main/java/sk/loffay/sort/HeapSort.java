@@ -30,20 +30,20 @@ public class HeapSort<T extends Comparable<T>> implements Sort<T> {
             swap(arr, 0, index);
             index--;
 
-            down(arr, index);
+            siftDown(arr, index);
         }
     }
 
     private void heapify(T[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            up(arr, i);
+            siftUp(arr, i);
         }
     }
 
     /**
      * Move if the element at index i is greater than parent move it to the top
      */
-    private void up(T[] arr, int index) {
+    private void siftUp(T[] arr, int index) {
         while (index != 0) {
             int parentIndex = parentIndex(index);
 
@@ -60,7 +60,7 @@ public class HeapSort<T extends Comparable<T>> implements Sort<T> {
      * Moves element(parent) down
      * if the child node is higher than root then swap it and go down
      */
-    private void down(T[] arr, final int last) {
+    private void siftDown(T[] arr, final int last) {
         int parent = 0;
 
         while (leftChild(parent) <= last) {

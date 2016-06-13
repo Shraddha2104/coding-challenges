@@ -1,4 +1,4 @@
-package sk.loffay.collections;
+package sk.loffay.collections.tree;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import sk.loffay.Utils;
+import sk.loffay.collections.tree.AvlTree;
+import sk.loffay.collections.tree.TreeTraversals;
 
 /**
  * @author Pavol Loffay

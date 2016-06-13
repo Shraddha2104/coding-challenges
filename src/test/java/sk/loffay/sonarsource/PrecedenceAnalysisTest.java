@@ -3,9 +3,6 @@ package sk.loffay.sonarsource;
 import org.junit.Assert;
 import org.junit.Test;
 
-import sk.loffay.sonarsource.PrecedenceAnalysis;
-
-
 /**
  * @author Pavol Loffay
  */

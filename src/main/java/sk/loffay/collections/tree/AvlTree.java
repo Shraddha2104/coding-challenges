@@ -1,4 +1,4 @@
-package sk.loffay.collections;
+package sk.loffay.collections.tree;
 
 
 import java.util.Collections;
