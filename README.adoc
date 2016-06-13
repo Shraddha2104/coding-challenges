@@ -47,6 +47,7 @@
 
 ===== Hard
 * String Permutations
+* Repeated Substring
 
 == Codility
 
