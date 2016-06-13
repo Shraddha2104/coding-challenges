@@ -3,8 +3,7 @@ package sk.loffay.sort;
 /**
  * Search algorithm that finds the position of a target value within a sorted array
  *
- * O(N) time
- * O(1) space
+ * O(log(N)) time
  *
  * @author Pavol Loffay
  */

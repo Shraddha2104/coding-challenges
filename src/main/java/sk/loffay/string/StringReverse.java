@@ -5,6 +5,9 @@ package sk.loffay.string;
  */
 public class StringReverse {
 
+    /**
+     * reverse whole string
+     */
     public static char[] reverse(char string[]) {
 
         for (int i = 0; i < string.length/2; i++) {
