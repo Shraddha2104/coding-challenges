@@ -3,13 +3,8 @@ package sk.loffay.codeeval.moderate;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.TreeMap;
-
-import org.w3c.dom.css.Rect;
 
 /**
  * @author Pavol Loffay

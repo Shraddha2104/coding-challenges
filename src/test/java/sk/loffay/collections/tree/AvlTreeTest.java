@@ -9,8 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import sk.loffay.Utils;
-import sk.loffay.collections.tree.AvlTree;
-import sk.loffay.collections.tree.TreeTraversals;
 
 /**
  * @author Pavol Loffay
@@ -41,8 +39,9 @@ public class AvlTreeTest {
         Assert.assertTrue(Utils.isSorted(inOrder, true));
 
         List<Integer> preOrder = TreeTraversals.preOrder(tree.getRoot());
-        Assert.assertTrue(Utils.isPreOrder(preOrder));
+        Assert.assertTrue(TreeTestUtils.isPreOrder(preOrder));
         Assert.assertTrue(tree.isBalanced());
+        Assert.assertTrue(TreeTestUtils.isValidBst(tree.getRoot()));
 
         List<Integer> bfsOrder = TreeTraversals.breadthFirstSearch(tree.getRoot());
         Assert.assertArrayEquals(new Integer[]{4, 2, 7, 1, 3, 6, 32, 15, 99}, bfsOrder.toArray(new Integer[0]));
@@ -77,9 +76,11 @@ public class AvlTreeTest {
 //            tree.print();
 
             Assert.assertTrue(Utils.isSorted(TreeTraversals.inOrderStack(tree.getRoot()), true));
-            Assert.assertTrue(Utils.isPreOrder(TreeTraversals.preOrderStack(tree.getRoot())));
-            Assert.assertTrue(Utils.isPostOrder(TreeTraversals.postOrder(tree.getRoot())));
+            Assert.assertTrue(TreeTestUtils.isPreOrder(TreeTraversals.preOrderStack(tree.getRoot())));
+            Assert.assertTrue(TreeTestUtils.isPostOrder(TreeTraversals.postOrder(tree.getRoot())));
             Assert.assertTrue("not balanced for: " + added.toString(), tree.isBalanced());
+            Assert.assertTrue(TreeTestUtils.isValidBst(tree.getRoot()));
         }
     }
+
 }
