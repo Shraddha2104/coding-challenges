@@ -15,11 +15,12 @@ public class SortTest {
     @Test
     public void testSortingAlgorithms() {
         List<Sort<Integer>> sortsToTest = new ArrayList<>(Arrays.asList(
-                new SelectionSort<>(),
                 new BubbleSort<>(),
                 new InsertionSort<>(),
+                new SelectionSort<>(),
+                new HeapSort<>(),
                 new MergeSort<>(),
-                new HeapSort<>()));
+                new QuickSort<>()));
 
         int runs = 5;
         int arrSize = 20;
