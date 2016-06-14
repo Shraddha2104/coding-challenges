@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author Pavol Loffay
+ *
+ * TODO NOT 100%
  */
 public class JollyJumpers {
 
@@ -38,14 +39,31 @@ public class JollyJumpers {
             return true;
         }
 
-        Set<Integer> seen = new HashSet<>();
+        TreeSet<Integer> jolly = new TreeSet<>();
 
+        int biggest = numbers[0];
         for (int i = 1; i < numbers.length; i++) {
             Integer diff = Math.abs(numbers[i] - numbers[i-1]);
-            if (diff < 1 || diff > numbers.length-1 || seen.contains(diff)) {
+            if (diff < 1 || diff > numbers.length-1) {
                 return false;
             }
-            seen.add(diff);
+            if (numbers[i] > biggest) {
+                biggest = numbers[i];
+            }
+
+            jolly.add(diff);
+        }
+
+        if (biggest - 1 != jolly.last()) {
+            return false;
+        }
+
+        int count = 1;
+        for (Integer num: jolly) {
+            if (num != count) {
+                return false;
+            }
+            count++;
         }
 
         return true;
