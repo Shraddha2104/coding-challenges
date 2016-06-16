@@ -30,7 +30,7 @@ public class NumberOfInversions {
         Tuple split = countSplitInversions(left.list, right.list);
 
 //        return new Tuple(split.list, split.inversions + left.inversions + right.inversions);
-        return new Tuple(split.list, split.inversions);
+        return new Tuple(split.list, split.inversions + left.inversions + right.inversions);
     }
 
     private static Tuple countSplitInversions(List<Integer> left, List<Integer> right) {
