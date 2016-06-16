@@ -10,6 +10,8 @@
 * File Size
 * Sum of Digits
 * Clean Up The Words
+* Bit Positions
+* Set Intersection
 
 ===== Moderate
 
@@ -53,6 +55,7 @@
 * String Permutations
 * Repeated Substring
 * Climbing Stairs
+* String List
 
 == Codility
 

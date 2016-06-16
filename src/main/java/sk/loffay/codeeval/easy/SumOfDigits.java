@@ -38,7 +38,7 @@ public class SumOfDigits {
         int sumOfDigits = 0;
 
         for (int i = line.length() -1 ; i >= 0; i--) {
-            sumOfDigits += Integer.parseInt(""+line.charAt(i));
+            sumOfDigits += (int)line.charAt(i) - 48;
         }
 
         return sumOfDigits;
