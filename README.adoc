@@ -12,6 +12,7 @@
 * Clean Up The Words
 * Bit Positions
 * Set Intersection
+* Fibonacci Series
 
 ===== Moderate
 
