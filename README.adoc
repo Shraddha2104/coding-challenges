@@ -7,6 +7,9 @@
 * Fizz Buzz
 * String Mask
 * Chardonnay Or Cabernet
+* File Size
+* Sum of Digits
+* Clean Up The Words
 
 ===== Moderate
 
