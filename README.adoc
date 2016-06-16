@@ -49,6 +49,7 @@
 ===== Hard
 * String Permutations
 * Repeated Substring
+* Climbing Stairs
 
 == Codility
 
