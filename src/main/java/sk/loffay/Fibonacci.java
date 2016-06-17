@@ -1,12 +1,15 @@
 package sk.loffay;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Pavol Loffay
  */
 public interface Fibonacci {
 
-    int fibonacci(int n);
-    int fibonacciSum(int n);
+    long fibonacci(int n);
+    long fibonacciSum(int n);
 
     abstract class AbstractFibonacci implements Fibonacci {
         protected final int seed0;
@@ -22,7 +25,7 @@ public interface Fibonacci {
         }
     }
 
-
+    @Tags("recursion")
     class RecursiveFibonacci extends AbstractFibonacci {
 
         public RecursiveFibonacci() {
@@ -34,7 +37,7 @@ public interface Fibonacci {
         }
 
         @Override
-        public int fibonacci(int n) {
+        public long fibonacci(int n) {
             if (n == 0) {
                 return seed0;
             } else if (n == 1) {
@@ -45,7 +48,7 @@ public interface Fibonacci {
         }
 
         @Override
-        public int fibonacciSum(int n) {
+        public long fibonacciSum(int n) {
             if (n == 0) {
                 return seed0;
             } else if (n == 1) {
@@ -67,7 +70,7 @@ public interface Fibonacci {
         }
 
         @Override
-        public int fibonacci(int n) {
+        public long fibonacci(int n) {
             if (n == 0) {
                 return seed0;
             } else if (n == 1) {
@@ -86,7 +89,7 @@ public interface Fibonacci {
         }
 
         @Override
-        public int fibonacciSum(int n) {
+        public long fibonacciSum(int n) {
             if (n == 0) {
                 return seed0;
             } else if (n == 1) {
@@ -108,4 +111,65 @@ public interface Fibonacci {
         }
     }
 
+    @Tags("dynamic programming")
+    class DynamicFibonacci extends AbstractFibonacci {
+
+        public DynamicFibonacci() {
+            super();
+        }
+
+        public DynamicFibonacci(int seed0, int seed1) {
+            super(seed0, seed1);
+        }
+
+        @Override
+        public long fibonacci(int n) {
+            Map<Integer, Long> results = new HashMap<>();
+            dynamicFibonacci(n, results);
+
+            return dynamicFibonacci(n, results);
+        }
+
+        private long dynamicFibonacci(int n, Map<Integer, Long> results) {
+            if (n == 0) {
+                return seed0;
+            } else if (n == 1) {
+                return seed1;
+            }
+
+            Long result =  results.get(n);
+            if (result == null) {
+                result = dynamicFibonacci(n - 1, results) + dynamicFibonacci(n - 2, results);
+                results.put(n, result);
+            }
+
+            return result;
+        }
+
+
+        @Override
+        public long fibonacciSum(int n) {
+            Map<Integer, Long> results = new HashMap<>();
+            return dynamicFibonacciSum(n, results);
+        }
+
+        private long dynamicFibonacciSum(int n, Map<Integer, Long> results) {
+            if (n == 0) {
+                return seed0;
+            } else if (n == 1) {
+                return seed1;
+            }
+
+            Long result = results.get(n);
+            if (result == null) {
+                Map<Integer, Long> resultFib = new HashMap<>();
+                result = dynamicFibonacci(n - 1, resultFib) + dynamicFibonacci(n - 2, resultFib) +
+                        dynamicFibonacciSum(n - 1, results);
+
+                results.put(n, result);
+            }
+
+            return result;
+        }
+    }
 }
