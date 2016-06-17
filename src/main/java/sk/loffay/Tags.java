@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * @author Pavol Loffay
  */
 @Retention(RetentionPolicy.SOURCE)
-@Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
+@Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.TYPE})
 public @interface Tags {
     String[] value();
 }

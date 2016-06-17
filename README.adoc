@@ -57,6 +57,7 @@
 * Repeated Substring
 * Climbing Stairs
 * String List
+* String Searching
 
 == Codility
 

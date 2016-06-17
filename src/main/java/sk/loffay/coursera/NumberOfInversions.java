@@ -29,7 +29,6 @@ public class NumberOfInversions {
         Tuple right = numberOfInversionsTuple(numbers.subList(middle, numbers.size()));
         Tuple split = countSplitInversions(left.list, right.list);
 
-//        return new Tuple(split.list, split.inversions + left.inversions + right.inversions);
         return new Tuple(split.list, split.inversions + left.inversions + right.inversions);
     }
 
