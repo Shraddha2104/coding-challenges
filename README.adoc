@@ -13,6 +13,7 @@
 * Bit Positions
 * Set Intersection
 * Fibonacci Series
+* Sum of Primes
 
 ===== Moderate
 
