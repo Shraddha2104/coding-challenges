@@ -14,6 +14,10 @@
 * Set Intersection
 * Fibonacci Series
 * Sum of Primes
+* Reverse Words
+* Swap Case
+* Find a Writer
+* Beautiful Strings
 
 ===== Moderate
 
@@ -79,3 +83,4 @@
 * https://projecteuler.net[Project Euler]
 * https://www.hackerearth.com[Hacker Earth]
 * http://codeforces.com[Code Forces]
+* http://www.hiredintech.com[Hired in Tech]
