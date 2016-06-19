@@ -4,23 +4,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
  * Class for generating dictionary entries
  * @author Pavol Loffay
  */
-@Ignore
 public class DictionaryGenerator {
 
-    @Test
-    public void testGenerateDictionary() throws IOException {
+    public static List<String> parseWords() throws IOException {
 
         ClassLoader classLoader = DictionaryGenerator.class.getClassLoader();
         File inputFile = new File(classLoader.getResource("textForDictionary").getFile());
@@ -38,6 +35,9 @@ public class DictionaryGenerator {
             for (String word: split) {
                 word = word.toLowerCase();
                 word = removeCharacters(word);
+                if (!word.matches("[a-zA-Z0-9]+")) {
+                    continue;
+                }
 
                 Integer count = wordsMap.get(word);
                 if (count == null) {
@@ -51,11 +51,7 @@ public class DictionaryGenerator {
         TreeMap<String, Integer> sortedWordsMap = new TreeMap<>(new ValueComparator(wordsMap));
         sortedWordsMap.putAll(wordsMap);
 
-        for (Map.Entry<String, Integer> entry: sortedWordsMap.entrySet()) {
-
-            System.out.println("\"" + entry.getKey() + "\"" + ",");
-        }
-
+        return new ArrayList<>(sortedWordsMap.keySet());
     }
 
     private static String removeCharacters(String word) {
@@ -65,6 +61,7 @@ public class DictionaryGenerator {
         word = word.replaceAll("\\.", "");
         word = word.replaceAll("'", "");
         word = word.replaceAll("\"", "");
+        word = word.replaceAll("-", "");
 
         return word;
     }
