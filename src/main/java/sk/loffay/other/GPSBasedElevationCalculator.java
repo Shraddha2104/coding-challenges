@@ -22,12 +22,12 @@ public class GPSBasedElevationCalculator {
     private GPSPoint previousPoint;
 
     /**
-     * @return true if process changed
+     * @return true if difference was greater than error radius
      */
-    public void process(GPSPoint currentPoint) {
+    public boolean process(GPSPoint currentPoint) {
         if (previousPoint == null) {
             previousPoint = currentPoint;
-            return;
+            return false;
         }
 
         int diff = currentPoint.altitude - previousPoint.altitude;
@@ -40,7 +40,10 @@ public class GPSBasedElevationCalculator {
             }
 
             previousPoint = currentPoint;
+            return true;
         }
+
+        return false;
     }
 
     public int getElevation() {
