@@ -6,11 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Pavol Loffay
@@ -32,43 +30,54 @@ public class SumToZero {
 
     public static int sumToZero(String line) {
         Integer[] numbers = parseLine(line);
-        return sumToZero(new LinkedList<>(Arrays.asList(numbers)), 0, new HashSet<>(), new ArrayList<>());
+        return sumToZero(Arrays.asList(numbers));
     }
 
-    public static int sumToZero(LinkedList<Integer> numbers, int sum,
-                                Set<String> results,
-                                List<Integer> summed) {
-        if (summed.size() >= 4) {
-            if (sum == 0) {
-                Collections.sort(summed);
-                String key = summed.toString();
-                boolean added = results.add(key);
-                if (added) {
-                    return 1;
-                } else {
-                    for (Integer integer: summed) {
-                        if (numbers.contains(integer)) {
-                            return 1;
-                        }
-                    }
-                }
+    public static int sumToZero(List<Integer> numbers) {
+
+        int sumToZeroCount = 0;
+
+        for (List<Integer> combination: combinations(numbers, 4)) {
+
+            int sum = 0;
+            for (int number: combination) {
+                sum += number;
             }
-            return 0;
+
+            if (sum == 0) {
+                sumToZeroCount++;
+            }
         }
 
-        int result = 0;
-        for (int i = 0; i < numbers.size(); i++) {
-            for (int j = i + 1; j < numbers.size(); j++) {
-                LinkedList<Integer> nextArr = new LinkedList<>(numbers);
-                nextArr.remove(i);
-                nextArr.remove(j-1);
+        return sumToZeroCount;
+    }
 
-                List<Integer> summedNext = new ArrayList<>(summed);
-                summedNext.add(numbers.get(i));
-                summedNext.add(numbers.get(j));
 
-                result += sumToZero(nextArr, sum + numbers.get(i) + numbers.get(j), results, summedNext);
+    public static <T> List<List<T>> combinations(List<T> elements, int size) {
+        elements = new LinkedList<>(elements);
+        List<List<T>> result = new ArrayList<>();
+
+        if (size == 1) {
+            for (int i = 0; i < elements.size(); i++) {
+                List<T> partialResult = new ArrayList<>();
+                partialResult.add(elements.get(i));
+                result.add(partialResult);
             }
+            return result;
+        }
+
+        Iterator<T> iterator = elements.iterator();
+        while (iterator.hasNext()) {
+            T element = iterator.next();
+            iterator.remove();
+            List<T> nextElements = new ArrayList<>(elements);
+
+            List<List<T>> partialResult = combinations(nextElements, size - 1);
+            for (List<T> partial : partialResult) {
+                partial.add(element);
+            }
+
+            result.addAll(partialResult);
         }
 
         return result;
