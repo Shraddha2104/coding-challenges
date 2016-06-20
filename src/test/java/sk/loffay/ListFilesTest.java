@@ -3,6 +3,7 @@ package sk.loffay;
 import org.junit.Test;
 
 import junit.framework.TestCase;
+import sk.loffay.other.ListFiles;
 
 /**
  * @author Pavol Loffay

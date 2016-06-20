@@ -1,4 +1,4 @@
-package sk.loffay;
+package sk.loffay.other;
 
 import java.io.File;
 import java.nio.file.Paths;

@@ -18,6 +18,8 @@
 * Swap Case
 * Find a Writer
 * Beautiful Strings
+* Multiply Lists
+* Capitalize Words
 
 ===== Moderate
 
