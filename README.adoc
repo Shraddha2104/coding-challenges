@@ -58,6 +58,8 @@
 * Broken LCD
 * Card Number Validation
 * Overlapping Rectangles
+* String Rotation
+* Valid Parentheses
 
 ===== Hard
 * String Permutations
