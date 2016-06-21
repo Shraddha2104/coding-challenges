@@ -72,6 +72,11 @@ public class SumToZero {
             iterator.remove();
             List<T> nextElements = new ArrayList<>(elements);
 
+            // optimization
+            if (size - 1 > nextElements.size()) {
+                break;
+            }
+
             List<List<T>> partialResult = combinations(nextElements, size - 1);
             for (List<T> partial : partialResult) {
                 partial.add(element);
