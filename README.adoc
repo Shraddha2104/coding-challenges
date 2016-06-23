@@ -63,6 +63,7 @@
 * Valid Parentheses
 * MTH To Last Element
 * Array Absurdity
+* Reverse Groups
 
 ===== Hard
 * String Permutations
