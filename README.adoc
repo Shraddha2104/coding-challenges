@@ -20,6 +20,7 @@
 * Beautiful Strings
 * Multiply Lists
 * Capitalize Words
+* Lettercase Percentage Ratio
 
 ===== Moderate
 
@@ -60,6 +61,8 @@
 * Overlapping Rectangles
 * String Rotation
 * Valid Parentheses
+* MTH To Last Element
+* Array Absurdity
 
 ===== Hard
 * String Permutations
