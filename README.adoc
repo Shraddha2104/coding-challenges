@@ -21,6 +21,7 @@
 * Multiply Lists
 * Capitalize Words
 * Lettercase Percentage Ratio
+* Lowest Unique Number
 
 ===== Moderate
 
