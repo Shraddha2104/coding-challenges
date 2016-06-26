@@ -22,6 +22,7 @@
 * Capitalize Words
 * Lettercase Percentage Ratio
 * Lowest Unique Number
+* Longest Words
 
 ===== Moderate
 
