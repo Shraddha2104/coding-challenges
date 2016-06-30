@@ -23,6 +23,7 @@
 * Lettercase Percentage Ratio
 * Lowest Unique Number
 * Longest Words
+* Multiples of a Number
 
 ===== Moderate
 
